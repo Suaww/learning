@@ -1,0 +1,5 @@
+1、H5性能更优定时器：requestAnimationFram（fn）----->类似于setTimeout,但是没有时间间隔选项，性能更优；可用cancleAnimationFram(name)取消定时器
+2、Array.includes(value,index)----->查找一个值在不在数组里，返回true/false
+3、Array.indexOf(value)------->返回-1/value所在的位置
+4、2**3 = 8(求幂运算符)效果等同于Math.pow(2,3) = 8
+5、String.padStart(10, 'hi')----->填充后的长度；填充的字符（默认为空字符串）;String.padEnd(lenght, 'string')
