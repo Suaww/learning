@@ -3,3 +3,222 @@
 3、Array.indexOf(value)------->返回-1/value所在的位置
 4、2**3 = 8(求幂运算符)效果等同于Math.pow(2,3) = 8
 5、String.padStart(10, 'hi')----->填充后的长度；填充的字符（默认为空字符串）;String.padEnd(lenght, 'string')
+6、一元运算符：
+	+“22” =22（number）
+	-“22” =-22（number）
+
+7、位运算符：（将两个数字都转换为32位2进制的数，两者进行比较）
+	|：25 | 3 （同一位置只要一方有值就取）
+	&：25 | 3 （同一位置需要双方方都有有值才取）
+	^：25 | 3 （同一位置只有一方有值才会就取）
+	<<：左移运算符（将数字转换为2进制32位，进行左移）
+	>>：右移运算符（将数字转换为2进制32位，进行右移）
+
+8、迭代语句
+	8.1：do{
+		statement
+	}while(i<8)
+	8.2：while()
+
+9、break && continue
+	break: 退出循环阻止再次执行任何代码
+	continue: 退出本次循环，进入下次循环
+	这两个语句可以和标签语句联合使用，指定退出哪个循环。通常用在循环内部还有循环
+
+10、with语句
+	with('messgae') {
+		toUpperCase()
+	}检查'messgae'是否有方法toUpperCase()，有的话就执行
+
+11、arguments对象
+	函数中默认都可以通过arguments访问函数的参数，arguments是一个数组（最多25个）
+
+12、Date类
+   12.1：Date.parse（）
+	new Date(Date.parse(may 25, 2018))
+	new Date(Date.parse(8/25/2018))
+   12.2：Date.UTC（）:月份是0~11，年月是必须的其他的可选的
+	new Date(Date.UTC(2018，3,4))----2018年4月4号
+	new Date(Date.UTC(2018，3,4，12,25,60))----
+	new Date(2018，3,4，12,25,60)----还可这样
+	
+13、继承
+	对象冒充方法：对象只是一个函数，因此可以在另一个构造函数中使用，this指向所属对象
+	fnName1.call（obj, argument1, argument2）类似于对象冒充方法, 
+	fnName1.apply（obj, [argument1, argument2]）
+
+	调用一个对象的一个方法，以另一个对象替换当前对象。call()
+	应用某一对象的一个方法，用另一个对象替换当前对象。apply()
+
+14、window对象
+	window.alert()
+	window.confirm('string')：返回用户选择的结果：true || false
+	window.prompt(“what's your name”，“可选填默认值”)：返回用户输入的结果
+
+
+15、正则表达式
+	new RegExp('cat', g)
+	/'cat'/gi
+   String.replace(regExp：被替换的字符, '用来替换的字符串'：此处可为function)
+   String.split(regExp：分割字符)
+  15.2：正则表达式的元字符，即正则表达式语法的一部分
+	（，{，[，\，^，$，|，），？，*，+，.
+
+	元字符在使用的时候，都必须对他们进行转义，如var reg1 = /\?/；非字面量方式需两个反斜杠如var reg2 = new regExp("\\?")
+  15.3：特殊字符
+	/\x62/:用ASCII码进制表示字母b,b的ASCII码为98,16进制为62
+	/\u0062/:用Unicode码进制表示字母b,必须指定字符串的四位十六进制表示形式
+	\t：制表符
+	\n：换行符
+	\r：回车符……等等
+  15.4：负向类：[^ab]；(^)脱字符告诉正则表达式不能匹配后面跟着的字符
+  15.5：范围类：[a-zA-Z0-9]
+  15.6：预定义类：
+		.等同于[^\n\r]:除了回车符和换行符之外的任意字符
+		\d  = [0-9]
+		\D = [^0-9]
+		\s = 空白字符
+		\S = 非空白字符
+		\w = [0-9a-zA-Z_]
+		\W = [^0-9a-zA-Z_]
+  15.7：量词
+	？：出现一次货0次
+	*：出现任意次数
+	+：出现一次或多次
+	{n}:一定出现n次
+	{n,m}:出现至少n次但不超过m次
+	{n,}:至少出现n次
+
+	15.7.1：贪婪的（量词格式不变）、惰性的（量词后加？）、支配的量词（量词后加+）
+  15.8：分组
+	/(gsg)?/
+	
+	15.8.1:反向引用：每个分组都被存在一个特殊的地方以备将来使用，这些储存在分组中的特殊值，称为反向引用,反向引用可以在String.replace(reg, "$1 $2")中使用
+	15.8.2:非捕获性分组，创建反向引用的的分组称为捕获性分组，不创建反向引用的的分组称为非捕获性分组：在左括号后加问好和冒号如（?:\d+)；这样可以节省开销
+  15.9：前瞻
+	某个特定字符出现在另一个字符串之前才捕获它。正向前瞻：接下来出现的是不是特定个特效的字符集；负向前瞻：检查的是接下来不应该出现的特定字符集
+	var reg = /(bed(?=rom))/：第一对括号是分组；第二对不是分组，（?=字符）表示正向前瞻；
+	var reg2 = /(bed(?!rom))/：匹配bed后不是rom的字符串
+  15.10：边界
+	^：行的开头
+	$：行的结尾
+	\b：单词的边界
+	\B：非单词的边界
+  15.11：多行模式（一般$符合只匹配行末，但是如果字符串中的换行符\也想作为行末来匹配，就可以使用多行模式，在正则表达式后添加一个m，^也是同样的道理）
+
+16、事件（捕获型事件先发生，冒泡型事件后发生）
+	直接添加事件是冒泡型事件
+	事件对象：ie是window.event；兼容写法：var event = arguments[0]
+  16.1：事件对象的属性方法
+	event.type：事件类型
+	event.keyCode：按下按键的数值代码（keydown/keyup事件）===》ie浏览器
+	检测用户是否按下Shift、Alt、Ctrl键，可以用event.shiftKey;event.altKey;event.ctrlKey
+	event.charCode：按键的代码 ====>DOM兼容浏览器
+        16.1.2：阻止浏览器默认事件
+		event.returnValue = false====>ie浏览器
+		event.preventDefault()====》DOM兼容浏览器
+	16.1.3：阻止冒泡
+		event.cancelBubble()=======>ie浏览器
+		event.stopPropagation()======>DOM兼容浏览器
+
+17、样式编程
+	oDiv.style.item(0)
+	oDiv.getPropertyValue.('background-color')
+	ooDiv.removeProperty.('background-color')
+  17.1：最终的样式：	oDiv.currentStyle.backroundColor(ie)；document.getComputedStyle(oDiv, '伪元素，可不填').backgroundColor
+
+
+18、错误处理
+	window.onerror = function(sMessage, sUrl, Sline){ 错误信息，错误信息的发生在哪个文件，发生错误的行号 }
+	try { } catch (oException){  } finally { } 
+
+19、js优化
+	删除注释、制表符、空格、换行；替换变量名
+	替换布尔值，用0/1表示
+	缩短否定检测，如：判断某个变量不为undefine/null/false,可以用！逻辑运算符代替
+	使用数组和对象字面量
+	使用局部变量，缩小查找范围
+	避免使用with语句
+	优化if..else..语句；将最有可能出现的情况放在第一个
+
+
+
+es6扩展：
+	1、字符串扩展：
+		s.startsWith('abc', 8)：检索从第8个字符开始到结束
+		s.endWith('abc', 8)：检索检索前8个字符
+		s.includes('abc', 8)：检索从第8个字符开始到结束
+		'a'.repeat(6)：//aaaaaa
+		'na'.repeat(2.9)：//nana（负数，无穷值都会报错，NAN等同于0；如果是字符串或先转换为数字）
+		'x'.padStart(5, 'ab')：//ababx(若原字符串长度等于或大于指定长度，则返回原字符串)
+		'x'.padStart(4, 'ab')：//abax（若省略第二个参数，默认用空格补全）
+		'x'.padEnd(5, 'ab')：//xabab
+		'x'.padEnd(4, 'ab')：//xaba
+		模板字符串：
+			`gsigsigjsigj  nngng`.trim()：消除空格换行
+			模板字符串可以嵌套使用
+	2、数值扩展：
+		Number.(0b111) //77 （二进制转为十进制）
+		Number.(0o10) //8 （八进制转为十进制）
+		Number.isFinite(22) 检查一个数值是否为有限的
+		Number.isNaN(22) 检查一个数值是否为NaN
+		Number.parseInt('22.2') //22
+		Number.parseFloat('22.22&&') //22.22
+		Number.isInteger(22) 判断一个值是否为整数
+		Number.parseFloat('22.22&&') //22.22
+		Number.EPSILON //一个很小的值
+		Number.isSafeInteger(55) //判断一个整数是否在-JavaScript能够精确表示的极限范围内，必须是number类型
+		
+
+	3、Math对象的扩展
+		Math.trunc() 去除一个数的小数部分，对于空值和无法截取的值返回NaN
+		Math.sign() 判断一个数是正数、负数、还是0（正数->1，负数->-1；0->0；-0->-0；其他值->NaN）
+		Math.cbrt() 计算一个数的立方根
+		Math.hypot（3,4）//5  方法返回所有参数的平方和的平方根。
+	4、Array的扩展
+		Array.from(arrLike， x => x+1) :类似数组的对象和可遍历的对象转换为真的数组
+		Array.of(2,6,3)：将一组值转换为数组
+		Array.copyWithin(target, start, end)：开始替换的位置、复制开始的位置，复制结束的位置
+		Array.find((n, index, arr) => { n > 9 })：后两个参数可省略。找到符合条件的第一个值，并返回该值，若没有则返回undefined,
+		Array.findIndex(value, index, arr)：类似find,返回第一个符合条件的成员的位置，如果没有返回-1
+		Array.fill(8)：使用给定值填充一个数组
+		Array.entries()；Array.keys()；Array.values()；它们都返回一个遍历器对象，可以用for..of循环遍历
+		Array.includes(6， 2)：某个数组是否包含给定的值（第二个参数，检索开始位置可以省略，可以为负数）
+	5、函数的扩展
+		(function (a = 0, b, c) {}).length // 0
+		(function(...args) {}).length // 0
+		(function (a, b = 1, c) {}).length // 1 :函数的length返回没有指定默认值的参数的个数
+		rest参数：...变量名；function(a, ...items){}；rest 参数之后不能再有其他参数（即只能是最后一个参数），否则会报错
+		函数的length属性不包括rest参数
+		箭头函数没有自己的this
+	6、对象的扩展
+		
+		1、ES6 允许直接写入变量和函数，作为对象的属性和方法。这样的书写更加简洁
+		{	
+		  x,
+		  y,
+		  method(){}
+		}
+		2、ES6 允许字面量定义对象时，表达式作为对象的属性名，即把表达式放在方括号内。
+		obj = {
+		  [变量]：true,
+		  ['a'+'cf']: 55
+		}
+		3、表达式还可以用于定义方法名。
+		obj = {
+		  ['hi'+'aa'](){},
+		}
+		注意，属性名表达式与简洁表示法，不能同时使用，会报错。
+
+
+		Object.is('ffoo', 'ffoo')：比较两个值是否相等
+			Object.is(+0, -0) // false
+			Object.is(NaN, NaN) // true
+		Object.assign()：用于对象合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
+				由于undefined和null无法转成对象，所以如果它们作为参数，就会报错。如果不在首位则会跳过
+				其他类型的值（即数值、字符串和布尔值）不在首参数，也不会报错。但是，除了字符串会以数组形式，拷贝入目标对象，其他值都不会产生效果。
+		Object.assign()方法实行的是浅拷贝，也就是说，如果源对象某个属性的值是对象，那么目标对象拷贝得到的是这个对象的引用。
+		Object.assign()同名属性会被替换
+		Object.assign([1, 2, 3], [4, 5]) // [4, 5, 3]
+		Object.getOwnPropertyDescriptor(obj, 'foo') 方法可以获取该属性的描述对象
+		Object.getOwnPropertyDescriptors(obj)方法，返回指定对象所有自身属性（非继承属性）的描述对象。

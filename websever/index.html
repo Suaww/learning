@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="btn" onclick="getText()">获取数据</div>
+        <div class="text"></div>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+
+    function getText(){
+        // $(".text").load("http:127.0.0.1:8080");
+        console.log('00')
+        var obj = {
+            getContent: function(content) {
+                document.querySelector('.text').innerHTML = `请求回来的数据：${content}`
+            }
+        }
+        loadXMLDoc(obj)
+    }
+    function loadXMLDoc(obj){
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+                obj.getContent(xmlhttp.responseText)
+            }
+        }
+        // xmlhttp.open("GET","http://172.22.1.112:8080/get?aa=0",true);
+        xmlhttp.open("POST","http://172.22.1.112:8080/post",true);
+        xmlhttp.send("fname=Bill&lname=Gates");
+    }
+
+</script>
+
+</html>
